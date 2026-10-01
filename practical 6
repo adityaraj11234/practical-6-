@@ -1,0 +1,128 @@
+using System;
+using System.Collections.Generic; using System.Linq;
+using System.Web; using System.Web.Mvc;
+
+namespace ProductCatalog_PRACTIAL_6.Controllers
+{
+public class HomeController : Controller
+{
+public ActionResult Index()
+{
+return View();
+}
+ 
+public ActionResult About()
+{
+ViewBag.Message = "Your application description page.";
+
+return View();
+}
+
+public ActionResult Contact()
+{
+ViewBag.Message = "Your contact page.";
+
+return View();
+}
+}
+}
+
+
+
+Source: Controllers -> ProductControllers.cs
+
+Code:
+using System.Collections.Generic; using System.Web.Mvc;
+using ProductCatalog_PRACTIAL_6.Models;
+
+namespace ProductCatalog_PRACTIAL_6.Controllers
+{
+public class ProductController : Controller
+{
+public ActionResult Index()
+{
+List<Product> products = new List<Product>
+{
+new Product
+{
+Id = 1,
+Name = "Laptop", Category = "Electronics", Price = 55000,
+Description = "Laptop for students"
+},
+new Product
+{
+Id = 2,
+Name = "Smartphone", Category = "Electronics",
+ 
+Price = 25000,
+Description = "Modern smartphone"
+},
+new Product
+{
+Id = 3,
+Name = "Headphones", Category = "Accessories", Price = 2000,
+Description = "Wireless headphones"
+}
+};
+
+return View(products);
+}
+}
+}
+
+
+
+Source: Models -> Product.cs
+
+Code:
+
+using System;
+using System.Collections.Generic; using System.Drawing;
+using System.Linq; using System.Web;
+
+namespace ProductCatalog_PRACTIAL_6.Models
+{
+public class Product
+{
+public int Id { get; set; }
+public string Name { get; set; } public string Category { get; set; } public decimal Price { get; set; } public string Description { get; set; }
+}
+}
+ 
+Source: View -> Product-> Index.cshtml
+
+Code:
+
+@model IEnumerable<ProductCatalog_PRACTIAL_6.Models.Product>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product Catalog</title>
+</head>
+<body>
+
+<h1>Product Catalog</h1>
+
+<table border="1" cellpadding="10">
+<tr>
+<th>ID</th>
+<th>Product Name</th>
+<th>Category</th>
+<th>Price</th>
+<th>Description</th>
+</tr>
+
+@foreach (var product in Model)
+{
+<tr>
+<td>@(product.Id)</td>
+<td>@(product.Name)</td>
+<td>@(product.Category)</td>
+<td>₹@(product.Price)</td>
+<td>@(product.Description)</td>
+</tr>
+}
+</table>
+
+</body>
+</html>
